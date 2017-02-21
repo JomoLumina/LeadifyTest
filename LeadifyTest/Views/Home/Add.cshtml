@@ -1,0 +1,60 @@
+﻿@model LeadifyTest.Models.Contacts
+@{
+    ViewBag.Title = "Add Ccontacct";
+    var username = User.Identity.Name;
+}
+
+<div class="container">
+    @using (Ajax.BeginForm(new AjaxOptions{LoadingElementId = "loader"}))
+    {
+
+        <div id="addbox" class="mainbox m-t-70">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <a href="@Url.Action("Index","Home")" class="back glyphicon glyphicon-menu-left"></a>
+                    <div class="panel-title text-center">Add new contact</div>
+                </div>
+
+                <div class="panel-body">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        @Html.TextBoxFor(c => c.FirstName, new { @class = "form-control", @placeholder = "First Name" })<br />
+                    </div>
+                    @Html.ValidationMessage("FirstName", "", new { @class = "field-error text-danger" })
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        @Html.TextBoxFor(c => c.LastName, new { @class = "form-control", @placeholder = "Last Name" })<br />
+                    </div>
+                    @Html.ValidationMessage("LastName", "", new { @class = "field-error text-danger" })
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        @Html.TextBoxFor(c => c.Email, new { @class = "form-control", @type = "email", @placeholder = "Email Address" })<br />
+                    </div>
+                    @Html.ValidationMessage("Email", "", new { @class = "field-error text-danger" })
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        @Html.TextBoxFor(c => c.Cellphone, new { @class = "form-control", @placeholder = "Cellphone Number" })<br />
+                    </div>
+                    @Html.ValidationMessage("Cellphone", "", new { @class = "field-error text-danger" })
+
+                    <div class="form-group m-t-30">
+                        <!-- Button -->
+                        <div class="controls">
+                            <button id="btnSave" class="btn btn-primary btn-lg btn-block btn-setmargin" type="submit">Save Contact</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    $(function ($) {
+        $("#Cellphone").mask("(999) 999-9999");
+    });
+</script>

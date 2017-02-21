@@ -1,0 +1,52 @@
+﻿@model LeadifyTest.Models.Users
+@{
+    ViewBag.Title = "Register User";
+}
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        <div id="registrationbox" class="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+
+            <div class="row text-center">
+                <img src="~/images/leadify.png" alt="image" class="leadify-logo" />
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title text-center">Register</div>
+                </div>
+
+                <div class="panel-body">
+                    <form name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            @Html.TextBoxFor(u => u.Username, new { @class = "form-control", @placeholder = "Username" })<br />
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            @Html.TextBoxFor(u => u.Email, new { @class = "form-control", @type = "email", @placeholder = "Email Address" })<br />
+                        </div>
+                        @Html.ValidationMessage("Email", "", new { @class = "field-error text-danger" })
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            @Html.PasswordFor(u => u.Password, new { @class = "form-control", @placeholder = "Password" })<br />
+                        </div>
+                        @Html.ValidationMessage("Password", "", new { @class = "field-error text-danger" })
+
+                        <div class="form-group text-center form-submit">
+                            <!-- Button -->
+                            <div class="controls">
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+@Html.Partial("~/Views/Shared/_particles.cshtml")
+

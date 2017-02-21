@@ -1,0 +1,76 @@
+﻿@model IEnumerable<LeadifyTest.Models.Contacts>
+@{
+    ViewBag.Title = "Contact List";
+    var username = User.Identity.Name;
+}
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="panel-title text-center">@username's Contact List</div>
+        </div>
+
+        <div class="panel-body">
+            <div class="table-container">
+                <table class="table table-bordered table-striped table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Contact ID</th>
+                            <th class="text-center">Fisrt Name</th>
+                            <th class="text-center">Last Name</th>
+                            <th class="text-center">Cellphone</th>
+                            <th class="text-center">E-Mail</th>
+                            <th class="text-center" colspan="2">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="table-data">@Html.DisplayFor(modelItem => item.ContactId)</td>
+                                <td class="table-data">@Html.DisplayFor(modelItem => item.FirstName)</td>
+                                <td class="table-data">@Html.DisplayFor(modelItem => item.LastName)</td>
+                                <td class="table-data">@Html.DisplayFor(modelItem => item.Cellphone)</td>
+                                <td class="table-data">@Html.DisplayFor(modelItem => item.Email)</td>
+                                <td class="text-center"><a class="pointer-arrow action-link text-success" href="@Url.Action("Edit", "Home")/@Html.DisplayFor(modelItem => item.ContactId)"><i class="glyphicon glyphicon-edit"></i></a></td>
+                                <td class="text-center"><a class="pointer-arrow action-link text-danger" onclick="confrimDelete(@Html.DisplayFor(modelItem => item.ContactId))"><i class="glyphicon glyphicon-remove-circle"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <a id="btnSave" class="btn btn-primary btn-lg btn-block btn-setmargin" href="@Url.Action("Add", "Home")">Create New Contact</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    var item;
+    function confrimDelete(id) {
+        item = id;
+        $("#confirm-delete").modal("toggle");
+    }
+
+    function performDelete() {
+        window.location.assign("/Home/Delete/" + item);
+    }
+</script>
+
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Confirm</h4>
+            </div>
+            <div class="modal-body">
+                <p>You are about to delete this contact.</p>
+                <p>Do you want to proceed?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <a class="btn btn-danger btn-ok" data-dismiss="modal" onclick="performDelete()">Yes</a>
+            </div>
+        </div>
+    </div>
+</div>
+

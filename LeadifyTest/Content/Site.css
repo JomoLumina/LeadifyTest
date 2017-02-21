@@ -1,0 +1,176 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+img {
+    width: 100%;
+}
+
+ul {
+    padding: 0;
+    text-align: center;
+}
+
+li {
+    display: block;
+}
+
+a.action-link {
+    font-size: 30px;
+    position: relative;
+    top: 4px;
+}
+
+.pointer-arrow:hover {
+    cursor: pointer;
+}
+
+.panel {
+    position: relative;
+    margin: 30px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.input-group {
+    margin: 10px;
+}
+
+    .input-group .form-control {
+        border-radius: 0 5px 5px 0 !important;
+    }
+
+.field-validation-valid {
+    display: none;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+span.field-validation-error.field-error.text-danger {
+    margin-left: 10px;
+    position: relative;
+    top: -10px;
+}
+
+.mainbox > div:first-child {
+    padding-bottom: 10px;
+}
+
+.mainbox {
+    margin-top: 30px;
+}
+
+
+.iconmelon {
+    display: block;
+    margin: auto;
+}
+
+
+#form > div:last-child {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#form > div {
+    margin-bottom: 25px;
+}
+
+.panel {
+    background-color: transparent;
+}
+
+.panel-body {
+    padding-top: 30px;
+    background-color: rgba(2555,255,255,.3);
+}
+
+#particles {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    z-index: -2;
+}
+
+.iconmelon:after,
+.im:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.iconmelon,
+.im {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: block;
+    fill: #525151;
+}
+
+.m-t-30 {
+    margin-top: 30px !important;
+}
+
+.m-t-70 {
+    margin-top: 70px !important;
+}
+
+.table-data {
+    text-align: center;
+    vertical-align: middle;
+}
+
+a.back.glyphicon.glyphicon-menu-left {
+    position: absolute;
+    top: -23px;
+    left: -23px;
+    font-size: 30px;
+    border: 3px solid;
+    border-radius: 25px;
+    padding: 6px;
+    color: #337ab7;
+    background: #fff;
+}
+
+    a.back.glyphicon.glyphicon-menu-left:hover {
+        background: #ccc;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+.leadify-logo {
+    max-width:350px;
+}
+
+.table-container{
+    position: relative;
+    width:100%;
+    overflow: auto;
+    max-height: 800px;
+    display: block;
+}
+
+a#btnSave {
+    margin-top: 20px;
+}
+
+.alert {
+    top: 25px;
+    position: relative;
+}
