@@ -8,13 +8,14 @@ using System.Security.Claims;
 using System.Threading;
 using System.Data.Entity;
 using System.Data.SqlClient;
+using PagedList;
 
 namespace LeadifyTest.Controllers
 {
     public class HomeController : BaseController
     {
         // GET: Home
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             var db = new MainDbContext();
             Claim sessionEmail = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email);
@@ -22,7 +23,19 @@ namespace LeadifyTest.Controllers
             var userIdQuery = db.Users.Where(u => u.Email == userEmail).Select(u => u.Id);
             var userIds = userIdQuery.ToList();
 
-            //sort
+            //pagination
+            ViewBag.CurrentSort = sortOrder;
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             ViewBag.ContactIdSortParam = String.IsNullOrEmpty(sortOrder) ? "contact_id_desc" : "";
             ViewBag.FirstNameSortParm = sortOrder == "first_name" ? "first_name_desc" : "first_name";
             ViewBag.LastNameSortParm = sortOrder == "last_name" ? "last_name_desc" : "last_name";
@@ -30,7 +43,6 @@ namespace LeadifyTest.Controllers
 
             var contacts = db.Contacts.Where(c => c.UserId == userIds.FirstOrDefault());
 
-            //search
             if (!String.IsNullOrEmpty(searchString))
             {
                 contacts = contacts.Where(c => c.FirstName.Contains(searchString)
@@ -64,7 +76,9 @@ namespace LeadifyTest.Controllers
                     contacts = contacts.OrderBy(c => c.ContactId);
                     break;
             }
-            return View(contacts.ToList());
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(contacts.ToPagedList(pageNumber, pageSize));
         }
 
 

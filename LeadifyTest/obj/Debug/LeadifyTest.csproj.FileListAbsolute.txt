@@ -61,3 +61,7 @@ C:\Users\jomo.lumina\Downloads\LeadifyTest\LeadifyTest\bin\System.Web.WebPages.R
 C:\Users\jomo.lumina\Downloads\LeadifyTest\LeadifyTest\obj\Debug\LeadifyTest.csprojResolveAssemblyReference.cache
 C:\Users\jomo.lumina\Downloads\LeadifyTest\LeadifyTest\obj\Debug\MyFirstWebsite.dll
 C:\Users\jomo.lumina\Downloads\LeadifyTest\LeadifyTest\obj\Debug\MyFirstWebsite.pdb
+C:\Users\jomo.lumina\Downloads\LeadifyTest\LeadifyTest\bin\PagedList.dll
+C:\Users\jomo.lumina\Downloads\LeadifyTest\LeadifyTest\bin\PagedList.Mvc.dll
+C:\Users\jomo.lumina\Downloads\LeadifyTest\LeadifyTest\bin\PagedList.xml
+C:\Users\jomo.lumina\Downloads\LeadifyTest\LeadifyTest\bin\PagedList.Mvc.xml

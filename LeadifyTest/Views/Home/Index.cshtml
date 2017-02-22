@@ -1,4 +1,6 @@
-﻿@model IEnumerable<LeadifyTest.Models.Contacts>
+﻿@model PagedList.IPagedList<LeadifyTest.Models.Contacts>
+@using PagedList.Mvc;
+
 @{
     ViewBag.Title = "Contact List";
     var username = User.Identity.Name;
@@ -16,7 +18,7 @@
                     <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search search-icon"></i> Search</button>
 
                     <div class="input-group">
-                        @Html.TextBox("SearchString", "", new { @class = "form-control", @placeholder = "Search" })<br />
+                        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Search" })<br />
                     </div>
                 }
             </div>
@@ -24,11 +26,11 @@
                 <table class="table table-bordered table-striped table-hover table-responsive">
                     <thead>
                         <tr>
-                            <th class="text-center">@Html.ActionLink("Contact ID", "Index", new { sortOrder = ViewBag.ContactIDSortParam })</th>
-                            <th class="text-center">@Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FirstNameSortParm })</th>
-                            <th class="text-center">@Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.LastNameSortParm })</th>
+                            <th class="text-center">@Html.ActionLink("Contact ID", "Index", new { sortOrder = ViewBag.ContactIDSortParam, currentFilter = ViewBag.CurrentFilter })</th>
+                            <th class="text-center">@Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FirstNameSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+                            <th class="text-center">@Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.LastNameSortParm, currentFilter = ViewBag.CurrentFilter })</th>
                             <th class="text-center">Cellphone</th>
-                            <th class="text-center">@Html.ActionLink("Email Address", "Index", new { sortOrder = ViewBag.EmailSortParm })</th>
+                            <th class="text-center">@Html.ActionLink("Email Address", "Index", new { sortOrder = ViewBag.EmailSortParm, currentFilter = ViewBag.CurrentFilter })</th>
                             <th class="text-center" colspan="2">Action</th>
                         </tr>
                     </thead>
@@ -47,6 +49,11 @@
                         }
                     </tbody>
                 </table>
+                <br />
+                <div class="text-center">
+                    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                </div>
             </div>
             <a id="btnSave" class="btn btn-primary btn-lg btn-block btn-setmargin" href="@Url.Action("Add", "Home")">Create New Contact</a>
         </div>
