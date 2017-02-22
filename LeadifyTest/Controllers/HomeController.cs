@@ -14,7 +14,7 @@ namespace LeadifyTest.Controllers
     public class HomeController : BaseController
     {
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
             var db = new MainDbContext();
             Claim sessionEmail = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email);
@@ -22,8 +22,66 @@ namespace LeadifyTest.Controllers
             var userIdQuery = db.Users.Where(u => u.Email == userEmail).Select(u => u.Id);
             var userIds = userIdQuery.ToList();
 
-            return View(db.Contacts.Where(c => c.UserId == userIds.FirstOrDefault()).ToList());
+            ViewBag.ContactIdSortParam = String.IsNullOrEmpty(sortOrder) ? "contact_id_desc" : "";
+            ViewBag.FirstNameSortParm = sortOrder == "first_name" ? "first_name_desc" : "first_name";
+            ViewBag.LastNameSortParm = sortOrder == "last_name" ? "last_name_desc" : "last_name";
+            ViewBag.EmailSortParm = sortOrder == "email" ? "email_desc" : "email";
+
+            var contacts = db.Contacts.Where(c => c.UserId == userIds.FirstOrDefault());
+            switch (sortOrder)
+            {
+                case "contact_id_desc":
+                    contacts = contacts.OrderByDescending(c => c.ContactId);
+                    break;
+                case "first_name":
+                    contacts = contacts.OrderBy(c => c.FirstName);
+                    break;
+                case "first_name_desc":
+                    contacts = contacts.OrderByDescending(c => c.FirstName);
+                    break;
+                case "last_name":
+                    contacts = contacts.OrderBy(c => c.LastName);
+                    break;
+                case "last_name_desc":
+                    contacts = contacts.OrderByDescending(c => c.LastName);
+                    break;
+                case "email":
+                    contacts = contacts.OrderBy(c => c.Email);
+                    break;
+                case "email_desc":
+                    contacts = contacts.OrderByDescending(c => c.Email);
+                    break;
+                default:
+                    contacts = contacts.OrderBy(c => c.ContactId);
+                    break;
+            }
+            return View(contacts.ToList());
         }
+
+
+        //public ActionResult Index(string sortOrder)
+        //{
+        //    ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+        //    ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+        //    var students = from s in db.Students
+        //                   select s;
+        //    switch (sortOrder)
+        //    {
+        //        case "name_desc":
+        //            students = students.OrderByDescending(s => s.LastName);
+        //            break;
+        //        case "Date":
+        //            students = students.OrderBy(s => s.EnrollmentDate);
+        //            break;
+        //        case "date_desc":
+        //            students = students.OrderByDescending(s => s.EnrollmentDate);
+        //            break;
+        //        default:
+        //            students = students.OrderBy(s => s.LastName);
+        //            break;
+        //    }
+        //    return View(students.ToList());
+        //}
 
         [HttpGet]
         public ActionResult Add()

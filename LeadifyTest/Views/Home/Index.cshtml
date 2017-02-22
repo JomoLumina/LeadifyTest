@@ -14,11 +14,11 @@
                 <table class="table table-bordered table-striped table-hover table-responsive">
                     <thead>
                         <tr>
-                            <th class="text-center">Contact ID</th>
-                            <th class="text-center">Fisrt Name</th>
-                            <th class="text-center">Last Name</th>
+                            <th class="text-center">@Html.ActionLink("Contact ID", "Index", new { sortOrder = ViewBag.ContactIDSortParam })</th>
+                            <th class="text-center">@Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FirstNameSortParm })</th>
+                            <th class="text-center">@Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.LastNameSortParm })</th>
                             <th class="text-center">Cellphone</th>
-                            <th class="text-center">E-Mail</th>
+                            <th class="text-center">@Html.ActionLink("Email Address", "Index", new { sortOrder = ViewBag.EmailSortParm })</th>
                             <th class="text-center" colspan="2">Action</th>
                         </tr>
                     </thead>
