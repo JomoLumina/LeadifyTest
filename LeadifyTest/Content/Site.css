@@ -26,6 +26,26 @@ a.action-link {
     cursor: pointer;
 }
 
+.searchbox form{
+    width: 100%;
+    display: block;
+}
+
+.searchbox .input-group {
+    display: inline-block;
+    position: relative;
+    top: -10px;
+    float: right;
+}
+
+.searchbox button{
+    float: right;
+}
+
+.searchbox input.form-control{
+    border-radius: 5px !important;
+}
+
 .panel {
     position: relative;
     margin: 30px;

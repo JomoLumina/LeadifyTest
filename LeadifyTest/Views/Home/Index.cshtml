@@ -10,6 +10,16 @@
         </div>
 
         <div class="panel-body">
+            <div class="searchbox">
+                @using (Html.BeginForm())
+                {
+                    <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search search-icon"></i> Search</button>
+
+                    <div class="input-group">
+                        @Html.TextBox("SearchString", "", new { @class = "form-control", @placeholder = "Search" })<br />
+                    </div>
+                }
+            </div>
             <div class="table-container">
                 <table class="table table-bordered table-striped table-hover table-responsive">
                     <thead>

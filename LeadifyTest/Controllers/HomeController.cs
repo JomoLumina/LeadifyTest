@@ -14,7 +14,7 @@ namespace LeadifyTest.Controllers
     public class HomeController : BaseController
     {
         // GET: Home
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string searchString)
         {
             var db = new MainDbContext();
             Claim sessionEmail = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email);
@@ -22,12 +22,21 @@ namespace LeadifyTest.Controllers
             var userIdQuery = db.Users.Where(u => u.Email == userEmail).Select(u => u.Id);
             var userIds = userIdQuery.ToList();
 
+            //sort
             ViewBag.ContactIdSortParam = String.IsNullOrEmpty(sortOrder) ? "contact_id_desc" : "";
             ViewBag.FirstNameSortParm = sortOrder == "first_name" ? "first_name_desc" : "first_name";
             ViewBag.LastNameSortParm = sortOrder == "last_name" ? "last_name_desc" : "last_name";
             ViewBag.EmailSortParm = sortOrder == "email" ? "email_desc" : "email";
 
             var contacts = db.Contacts.Where(c => c.UserId == userIds.FirstOrDefault());
+
+            //search
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                contacts = contacts.Where(c => c.FirstName.Contains(searchString)
+                                       || c.LastName.Contains(searchString) || c.Cellphone.Contains(searchString) || c.Email.Contains(searchString));
+            }
+
             switch (sortOrder)
             {
                 case "contact_id_desc":
